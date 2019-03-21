@@ -1,8 +1,10 @@
 import os
 
-def get_sql(db=r'E:\Торренты\Coding\11\botify\ln2sql\ln2sql\database_store\city.sql',
-    vocab=r'E:\Торренты\Coding\11\botify\ln2sql\ln2sql\lang_store\english.csv',
-    query='Count how many city there are with the name blob?'):
+def get_sql(db=r'database\city.sql',
+    vocab=r'ln2sql\lang\english.csv',
+    query='how many city there are in which the employee name is similar to aman ?'):
 
-    os.system('python -m ln2sql.main -d {} -l {} -j output.json -i \
-    	"{}"'.format(db, vocab, query))
+    os.system(r'python ln2sql\ln2sql.py -d {} -l {} -j output.json -i \
+         "{}"'.format(db, vocab, query))
+
+get_sql()
