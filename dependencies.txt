@@ -1,3 +1,0 @@
-ln2sql
-flask
-requests
