@@ -1,3 +1,4 @@
+import argparse
 from flask import Flask
 from flask import request
 from flask import jsonify
@@ -5,7 +6,16 @@ import requests
 import json
 from db_query import get_sql
 
-token = 'telegram_token'
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('-url', help='web page containing table data')
+parser.add_argument('-name', help='project name')
+parser.add_argument('-token', help='telegram token of bot')
+args = parser.parse_args()
+
+
+bot_name = args.name
+table_url = args.url
+telegram_token = args.token
 URL = 'https://api.telegram.org/bot' + token + '/'
 app = Flask(__name__)
 
