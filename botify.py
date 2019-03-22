@@ -5,7 +5,6 @@ from flask import jsonify
 from db_query import get_sql
 
 
-
 def make_databases(table_url, bot_name):
     os.system(r'sqlitebiter url "{}" -o {}'.format(sqlite_database))
     con = sqlite3.connect('{}'.format(sqlite_database))  
