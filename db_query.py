@@ -13,7 +13,7 @@ def fetch(query=r"SELECT * FROM heroes", db=r'heroes3/units.sqlite'):
     conn.close()
     return rows
 
-heroes3 = (r'heroes3/units.sql', r'units with Cost less than 10')
+heroes3 = (r'E:\Torrents\Coding\11\botify\heroes3\units.sql', r'Name of units with Cost less than 100')
 
 get_sql(*heroes3)
 print('------------------------------------')

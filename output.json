@@ -1,6 +1,6 @@
 {
 	"select": {
-		"column": "None",
+		"column": "Name",
 		"type": "None"
 	},
 	"from": {
@@ -13,7 +13,7 @@
 			{ "column": "Cost",
 			  "type": "None",
 			  "operator": "<",
-			  "value": "'10'"
+			  "value": "'100'"
 			}
 		]
 	},
