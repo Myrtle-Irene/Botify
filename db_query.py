@@ -1,15 +1,9 @@
-import os, sqlite3
+import os, sqlite3, win_unicode_console
+win_unicode_console.enable()
 def get_sql(db=r'ln2sql/database/city.sql', 
 	query=r'how many city there are in which the employee name is similar to aman ?',
 	vocab=r'ln2sql/lang/english.csv'):
 	os.system(r'''C:\Python27\python.exe ln2sql/ln2sql.py -d {} -l {} -j output.json -i "{}"'''.format(db, vocab, query))
-
-
-
-heroes3 = (r'heroes3/units.sql', r'how many units with Name  Dwarf')
-#get_sql(*heroes3)
-#get_sql()
-
 
 def fetch(query=r"SELECT * FROM heroes", db=r'heroes3/units.sqlite'):
 	conn = sqlite3.connect(db)
@@ -18,3 +12,8 @@ def fetch(query=r"SELECT * FROM heroes", db=r'heroes3/units.sqlite'):
 	rows = cur.fetchall()
 	conn.close()
 	return rows
+
+heroes3 = (r'heroes3/units.sql', r'what units have Attack greater than 15')
+get_sql(*heroes3)
+print('------------------------------------')
+#get_sql()

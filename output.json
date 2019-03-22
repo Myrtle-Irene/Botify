@@ -1,0 +1,24 @@
+{
+	"select": {
+		"column": "None",
+		"type": "None"
+	},
+	"from": {
+		"table": "units"
+	},
+	"join": {
+	},
+	"where": {
+		"condition": [
+			{ "column": "Attack",
+			  "type": "None",
+			  "operator": ">",
+			  "value": "'15'"
+			}
+		]
+	},
+	"group_by": {
+	},
+	"select": {
+	},
+}
