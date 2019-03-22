@@ -1,22 +1,14 @@
 {
 	"select": {
 		"column": "None",
-		"type": "COUNT"
+		"type": "None"
 	},
 	"from": {
-		"table": "city"
+		"table": "units"
 	},
 	"join": {
-		"table": "emp"
 	},
 	"where": {
-		"condition": [
-			{ "column": "name",
-			  "type": "None",
-			  "operator": "LIKE",
-			  "value": "'%aman%'"
-			}
-		]
 	},
 	"group_by": {
 	},
