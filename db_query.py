@@ -5,6 +5,6 @@ def get_sql(db=r'ln2sql/database/city.sql', vocab=r'ln2sql/lang/english.csv',
 
 
 
-heroes3 = (r'heroes3/units.sql', r'ln2sql/lang/english.csv', r'Att of units with Name  Dwarf')
+heroes3 = (r'heroes3/units.sql', r'ln2sql/lang/english.csv', r'how many units with Name  Dwarf')
 get_sql(*heroes3)
 #get_sql()
