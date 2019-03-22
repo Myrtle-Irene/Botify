@@ -1,5 +1,5 @@
 BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS "heroes3 units" (
+CREATE TABLE `heroes3 units` (
 	"Name"	TEXT,
 	"Lvl"	TEXT,
 	"Att"	INTEGER,
