@@ -1,13 +1,14 @@
-import argparse, os, sqlite3, request, json, getopt
+import argparse, os, sqlite3, requests, json, getopt
 from flask import Flask
 from flask import request
 from flask import jsonify
-from db_query import get_sql, fetch
+from db_query import get_sql
+
 
 
 def make_databases(table_url, bot_name):
     os.system(r'sqlitebiter url "{}" -o {}'.format(sqlite_database))
-    con = sqlite3.connect('{}'.format(sqlite_database)  
+    con = sqlite3.connect('{}'.format(sqlite_database))  
     with open(sql_file, 'w') as f:
         for line in con.iterdump():
             f.write('{}\n'.format(line))
@@ -37,16 +38,13 @@ def index():
         r = request.get_json()
         chat_id = r['message']['chat']['id']
         message = r['message']['text']
-        sql_query = get_sql(sql_file, message)
-        answer = fetch(sql_query, sqlite_database)
         send_message(chat_id, answer)
     return '<h1>request: GET.\n bot is working.</h1>'
 
 
-if __name__ == '__main__':  
-main(sys.argv[1:])
 
-def main(argv):
+def main():
+    """
     try:
         opts, args = getopt.getopt(argv,"url:name:token:existing:help:")
         bot_name = None
@@ -71,11 +69,14 @@ def main(argv):
         if existing = False and ((table_url is None) or (bot_name is None) or (telegram_token is None)):
             print_help_message()
             sys.exit()
-        
-        sql_file = os.path.join(os.path.abspath(os.path.curdir), bot_name + '.sql')
-        sqlite_database = os.path.join(os.path.abspath(os.path.curdir), bot_name + '.sqlite')
-        URL = 'https://api.telegram.org/bot' + token + '/'
-      
+    """
+    bot_name = 'bot name'
+    table_url = 'google.com'
+    telegram_token = '855401787:AAHjueP4Ih-MF5WjL0NW-ISoN28qK5Vw4B8'
+    URL = 'https://api.telegram.org/bot' + telegram_token + '/'
+    sql_file = os.path.join(os.path.abspath(os.path.curdir), bot_name + '.sql')
+    sqlite_database = os.path.join(os.path.abspath(os.path.curdir), bot_name + '.sqlite')
+    """
         with open('temp.json', 'w') as df:
             vars = bot_name, table_url, telegram_token, sql_file, sqlite_database
             df.write(json.dumps(vars))
@@ -83,10 +84,12 @@ def main(argv):
         if existing == True:
             with open('temp.json', 'r') as df:
                 bot_name, table_url, telegram_token, sql_file, sqlite_database = json.loads(df.read())
-        
+    """
 
     try:
         app.run()
-    except Exception, e:
+    except Exception as e:
         print(str(e))
     
+if __name__ == '__main__':
+    main()
