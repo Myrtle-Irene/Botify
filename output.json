@@ -10,10 +10,10 @@
 	},
 	"where": {
 		"condition": [
-			{ "column": "Attack",
+			{ "column": "Cost",
 			  "type": "None",
-			  "operator": ">",
-			  "value": "'15'"
+			  "operator": "<",
+			  "value": "'10'"
 			}
 		]
 	},

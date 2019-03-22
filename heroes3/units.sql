@@ -5,7 +5,7 @@ CREATE TABLE `units` (
 	`Attack`	INTEGER,
 	`Defense`	INTEGER,
 	`D-`	INTEGER,
-	`D+`	INTEGER,
+	`Damage`	INTEGER,
 	`Health`	INTEGER,
 	`Speed`	INTEGER,
 	`Growth`	INTEGER,
