@@ -4,19 +4,26 @@ from flask import request
 from flask import jsonify
 from db_query import get_sql, fetch
 
-parser = argparse.ArgumentParser(description='Process some integers.')
+parser = argparse.ArgumentParser(description='One-click bot creation from web data')
+parser.add_argument('-existing', type=bool, help='turn on existing bot')
 parser.add_argument('-url', help='web page containing table data')
 parser.add_argument('-name', help='project name')
 parser.add_argument('-token', help='telegram token of bot')
 args = parser.parse_args()
 
-
-bot_name = args.name
-table_url = args.url
-telegram_token = args.token
-sql_file = os.path.join(os.path.abspath(os.path.curdir), bot_name + '.sql')
-sqlite_database = os.path.join(os.path.abspath(os.path.curdir), bot_name + '.sqlite')
+if args.existing == True:
+    with open('temp.json', 'r') as df:
+        bot_name, table_url, telegram_token, sql_file, sqlite_database = json.loads(df.read())
+else:
+    bot_name = args.name
+    table_url = args.url
+    telegram_token = args.token
+    sql_file = os.path.join(os.path.abspath(os.path.curdir), bot_name + '.sql')
+    sqlite_database = os.path.join(os.path.abspath(os.path.curdir), bot_name + '.sqlite')
 URL = 'https://api.telegram.org/bot' + token + '/'
+with open('temp.json', 'w') as df:
+    vars = bot_name, table_url, telegram_token, sql_file, sqlite_database
+    df.write(json.dumps(vars))
 
 def make_databases(table_url, bot_name):
     os.system(r'sqlitebiter url "{}" -o {}'.format(sqlite_database))
