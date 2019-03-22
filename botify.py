@@ -33,9 +33,7 @@ def make_databases(table_url, bot_name):
             f.write('{}\n'.format(line))
 
 
-
 app = Flask(__name__)
-
 def send_message(chat_id, text='empty query'):
     url = URL + 'sendMessage'
     answer = {'chat_id': chat_id,
