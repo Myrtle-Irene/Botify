@@ -1,30 +1,42 @@
-import argparse, os, sqlite3, requests, json, getopt
+import argparse, os, sys, sqlite3, shutil, requests, json, getopt
 from flask import Flask
 from flask import request
 from flask import jsonify
-from db_query import get_sql
+from pprint import pprint
+from db_query import get_reply
 
 
-def make_databases(table_url, bot_name):
-    os.system(r'sqlitebiter url "{}" -o {}'.format(sqlite_database))
+bot_web_url = "<your-https-url>"
+tg_url = 'https://api.telegram.org/bot' + telegram_token + '/'
+
+def make_databases(table_url, bot_directory):
+    os.system(r'sqlitebiter url "{}"'.format(table_url))
+    shutil.move('out.sqlite', bot_directory)
+    os.rename(os.path.join(bot_directory, 'out.sqlite'), sqlite_database)
     con = sqlite3.connect('{}'.format(sqlite_database))  
     with open(sql_file, 'w') as f:
         for line in con.iterdump():
             f.write('{}\n'.format(line))
+    print('Congrat! Databases ready.')
 
 def print_help_message():
-    print('\n')
     print('Usage:')
-    print('\tpython botify.py -url <your web page>  -name <bot name>  -token <telegram unique token>')
-    print('or')
-    print('\tpython botify.py -existing <True>')
-    print('to launch existing bot')
+    print(r'$python botify.py -u <your web page>  -n <bot name(only letters and digits)>  -t <telegram unique token>')
+    print(r'or "$python botify.py -e True"  to launch existing bot')
 
+def bind_web_url():
+    r = requests.get(get_url("setWebhook"), data={"url": bot_web_url})
+    r = requests.get(get_url("getWebhookInfo"))
+    pprint(r.status_code)
+    pprint(r.json())
+
+    def get_url(method):
+        return "https://api.telegram.org/bot{}/{}".format(telegram_token ,method)
 
 
 app = Flask(__name__)
 def send_message(chat_id, text='empty query'):
-    url = URL + 'sendMessage'
+    url = tg_url + 'sendMessage'
     answer = {'chat_id': chat_id,
               'text': text,
               'parse_mode': 'HTML'}
@@ -36,54 +48,48 @@ def index():
     if request.method == 'POST': 
         r = request.get_json()
         chat_id = r['message']['chat']['id']
-        message = r['message']['text']
+        message = str(r['message']['text'])
+        answer = get_reply(sql_file, message, sqlite_database)
         send_message(chat_id, answer)
     return '<h1>request: GET.\n bot is working.</h1>'
 
 
-
 def main():
-    """
     try:
-        opts, args = getopt.getopt(argv,"url:name:token:existing:help:")
-        bot_name = None
-        table_url = None
-        telegram_token = None
-        for i in range(0, len(opts)):
-            if opts[i][0] == "-url":
-                table_url = opts[i][1]
-            elif opts[i][0] == "-name":
-                bot_name = opts[i][1]
-            elif opts[i][0] == "-token":
-                 telegram_token = opts[i][1]
-            elif opts[i][0] == "-existing":
-                existing = opts[i][1]
-            else:
-                print_help_message()
-                sys.exit()
-        except getopt.GetoptError:
+        opts, args = getopt.getopt(sys.argv[1:], "u:n:t:e:h:")
+        bot_name, table_url, telegram_token, existing = None, None, None, False
+    except getopt.GetoptError:
+        print_help_message()
+        sys.exit()
+
+    for i in range(0, len(opts)):
+        if opts[i][0] == "-u":
+            table_url = opts[i][1]
+        elif opts[i][0] == "-n":
+            bot_name = opts[i][1]
+        elif opts[i][0] == "-t":
+            telegram_token = opts[i][1]
+        elif opts[i][0] == "-e":
+            existing = opts[i][1]
+        else:
             print_help_message()
             sys.exit()
 
-        if existing = False and ((table_url is None) or (bot_name is None) or (telegram_token is None)):
-            print_help_message()
-            sys.exit()
-    """
-    bot_name = 'bot name'
-    table_url = 'google.com'
-    telegram_token = '855401787:AAHjueP4Ih-MF5WjL0NW-ISoN28qK5Vw4B8'
-    URL = 'https://api.telegram.org/bot' + telegram_token + '/'
-    sql_file = os.path.join(os.path.abspath(os.path.curdir), bot_name + '.sql')
-    sqlite_database = os.path.join(os.path.abspath(os.path.curdir), bot_name + '.sqlite')
-    """
-        with open('temp.json', 'w') as df:
+    if existing == (None or False) and ((table_url is None) or (bot_name is None) or (telegram_token is None)):
+        print_help_message()
+        sys.exit()
+    
+    bot_directory = os.path.join(os.path.abspath(os.path.curdir), bot_name)
+    if existing == False:
+        sql_file = os.path.join(bot_directory, bot_name + '.sql')
+        sqlite_database = os.path.join(bot_directory, bot_name + '.sqlite')
+        with open('{}/temp.json'.format(bot_directory), 'w') as df:
             vars = bot_name, table_url, telegram_token, sql_file, sqlite_database
             df.write(json.dumps(vars))
       
-        if existing == True:
-            with open('temp.json', 'r') as df:
-                bot_name, table_url, telegram_token, sql_file, sqlite_database = json.loads(df.read())
-    """
+    if existing == True:
+        with open('{}/temp.json'.format(bot_directory), 'r') as df:
+            bot_name, table_url, telegram_token, sql_file, sqlite_database = json.loads(df.read())
 
     try:
         app.run()
