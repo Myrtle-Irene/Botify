@@ -21,7 +21,7 @@ def make_databases(table_url, bot_directory):
 
 def print_help_message():
     print('Usage:')
-    print(r'$python botify.py -u <your web page>  -n <bot name(only letters and digits)>  -t <telegram unique token>')
+    print(r'"$python botify.py -u <your web page>  -n <bot name(only letters and digits)>  -t <telegram unique token>"')
     print(r'or "$python botify.py -e True"  to launch existing bot')
 
 def bind_web_url():
