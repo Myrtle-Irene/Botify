@@ -31,7 +31,7 @@ def bind_web_url():
     pprint(r.json())
 
     def get_url(method):
-        return "https://api.telegram.org/bot{}/{}".format(telegram_token ,method)
+        return "https://api.telegram.org/bot{}/{}".format(telegram_token, method)
 
 
 app = Flask(__name__)
@@ -83,6 +83,8 @@ def main():
     if existing == False:
         sql_file = os.path.join(bot_directory, bot_name + '.sql')
         sqlite_database = os.path.join(bot_directory, bot_name + '.sqlite')
+        make_databases(table_url, bot_directory)
+        bind_web_url()
         with open('{}/temp.json'.format(bot_directory), 'w') as df:
             vars = bot_name, table_url, telegram_token, sql_file, sqlite_database
             df.write(json.dumps(vars))
@@ -90,6 +92,7 @@ def main():
     if existing == True:
         with open('{}/temp.json'.format(bot_directory), 'r') as df:
             bot_name, table_url, telegram_token, sql_file, sqlite_database = json.loads(df.read())
+        bind_web_url()
 
     try:
         app.run()
