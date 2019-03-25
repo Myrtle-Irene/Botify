@@ -2,10 +2,13 @@ import argparse, os, sys, sqlite3, shutil, requests, json
 from pprint import pprint
 from flask import Flask, request, jsonify
 
+#specify this
 bot_web_url = r"Your https url (bot's web endpoint)" 
+python2_path = r'C:\Python27\python.exe'
+#
+
 bot_name, table_url, telegram_token, sql_file, sqlite_database = None, None, None, None, None
 tg_url = 'https://api.telegram.org/bot' + telegram_token + '/'
-python2_path = r'C:\Python27\python.exe'
 
 def make_databases(table_url, bot_directory):
     os.system(r'sqlitebiter url "{}"'.format(table_url))
