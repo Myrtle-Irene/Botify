@@ -1,16 +1,16 @@
 BEGIN TRANSACTION;
-CREATE TABLE `units` (
-	`Name`	TEXT,
-	`Level`	TEXT,
-	`Attack`	INTEGER,
-	`Defense`	INTEGER,
-	`D-`	INTEGER,
-	`Damage`	INTEGER,
-	`Health`	INTEGER,
-	`Speed`	INTEGER,
-	`Growth`	INTEGER,
-	`Value`	INTEGER,
-	`Cost`	INTEGER
+CREATE TABLE "units" (
+	"Name"	TEXT,
+	"Level"	TEXT,
+	"Attack"	INTEGER,
+	"Defense"	INTEGER,
+	"D-""	INTEGER,
+	"Damage"	INTEGER,
+	"Health"	INTEGER,
+	"Speed"	INTEGER,
+	"Growth"	INTEGER,
+	"Value"	INTEGER,
+	"Cost"	INTEGER
 );
 INSERT INTO "units" VALUES ('Pikeman ','1',4,5,1,3,10,4,14,80,60);
 INSERT INTO "units" VALUES ('Halberdier ','1+',6,5,2,3,10,5,14,115,75);
