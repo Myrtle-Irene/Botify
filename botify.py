@@ -15,7 +15,6 @@ def make_databases(sql_file, table_url, bot_directory, sqlite_database):
     shutil.move('out.sqlite', bot_directory)
     os.rename(os.path.join(bot_directory, 'out.sqlite'), sqlite_database)
     con = sqlite3.connect('{}'.format(sqlite_database))
-    cur = con.cursor()
     with open(sql_file, 'w') as f:
         for line in con.iterdump():
             f.write('{}\n'.format(line))
@@ -34,7 +33,7 @@ def print_help_message():
     print(r'"$python botify.py <bot name(only letters and digits)> <your web page> <telegram unique token>"')
     print(r'or "$python botify.py -e <bot name>"  to launch existing bot')
     print('Example: "python botify.py Heroes3bot http://heroes.thelazy.net/wiki/List_of_creatures 855401787:AAHjueP4Ih-MF5WjL0NW-ISoN28qK5Vw4B8"')
-"""
+
 def bind_web_url():
     def get_url(method):
         return "https://api.telegram.org/bot{}/{}".format(telegram_token, method)
@@ -42,7 +41,7 @@ def bind_web_url():
     r = requests.get(get_url("getWebhookInfo"))
     pprint(r.status_code)
     pprint(r.json())
-"""
+
 def main():
     sys.argv = 'botify.py Heroes3bot http://heroes.thelazy.net/wiki/List_of_creatures \
     855401787:AAHjueP4Ih-MF5WjL0NW-ISoN28qK5Vw4B8'
@@ -80,7 +79,7 @@ def main():
     if existing == True:
         with open('{}/temp.json'.format(bot_directory), 'r') as df:
             bot_name, table_url, telegram_token, sql_file, sqlite_database = json.loads(df.read())
-
+    
 
     app = Flask(__name__)
 
@@ -100,12 +99,13 @@ def main():
             message = str(r['message']['text'])
             answer = get_reply(sql_file, message, sqlite_database)
             send_message(chat_id, answer)
-        return '<h1>request: GET.\n bot is working.</h1>'
+        return 'Bot is online.'
 
     try:
         app.run()
+        bind_web_url()
     except Exception as e:
         print(str(e))
-        
+      
 if __name__ == '__main__':
     main()
