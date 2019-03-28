@@ -1,10 +1,10 @@
 BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS "heroes3 units creatures characters" (
+CREATE TABLE IF NOT EXISTS "heroes" (
 	"Name"	TEXT,
 	"Town"	TEXT,
 	"Lvl"	TEXT,
 	"Att"	INTEGER,
-	"strength defense"	INTEGER,
+	"defense"	INTEGER,
 	"D-"	INTEGER,
 	"D+"	INTEGER,
 	"HP"	INTEGER,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS "heroes3 units creatures characters" (
 	"M"	TEXT,
 	"Special"	TEXT
 );
-INSERT INTO "heroes3 units creatures characters" ("Name","Town","Lvl","Att","strength defense","D-","D+","HP","Spd","Grw","Val","Cost","M","Special") VALUES ('Pikeman','','1',4,5,1,3,10,4,14,80,60,'','Immune to jousting'),
+INSERT INTO "heroes" ("Name","Town","Lvl","Att","defense","D-","D+","HP","Spd","Grw","Val","Cost","M","Special") VALUES ('Pikeman','','1',4,5,1,3,10,4,14,80,60,'','Immune to jousting'),
  ('Halberdier','','1+',6,5,2,3,10,5,14,115,75,'','Immune to jousting'),
  ('Archer','','2',6,3,2,3,10,4,9,126,100,'','Ranged (12 shots)'),
  ('Marksman','','2+',6,3,2,3,10,6,9,184,150,'','Ranged (24 shots), Double attack'),

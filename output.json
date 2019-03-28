@@ -1,0 +1,24 @@
+{
+	"select": {
+		"column": "Name",
+		"type": "None"
+	},
+	"from": {
+		"table": "heroes"
+	},
+	"join": {
+	},
+	"where": {
+		"condition": [
+			{ "column": "defense",
+			  "type": "None",
+			  "operator": "<",
+			  "value": "'3'"
+			}
+		]
+	},
+	"group_by": {
+	},
+	"select": {
+	},
+}

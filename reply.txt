@@ -1,0 +1,8 @@
+Goblin
+Pixie
+Sprite
+Peasant
+Halfling
+
+Use keywords: {'heroes': ['Name', 'Town', 'Lvl', 'Att', 'defense', 'HP', 'Spd', 'Grw', 'Val', 'Cost', 'M', 'Special']}
+SELECT heroes.Name FROM heroes WHERE  heroes.defense < '3';
