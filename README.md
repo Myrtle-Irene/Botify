@@ -1,5 +1,6 @@
-Currently only telegram supported.
+# Made with :heart: by a :banana: developer :ghost:
 
+Currently only telegram supported.
 Usage: $python bofily.py -help
 
 After creating new chatbot you need to go to 'botname' folder and edit database, using any software(e.g. DB Browser SQLite), because automatically created default field names probably are not very useful, then substitute "botname.sql" file with "Export db to sql dump file..." menu option. 
