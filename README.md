@@ -1,5 +1,7 @@
 # botify
 Currently only telegram supported.
+Made with ❤️ by a 🍌 developer 👻
+
 
 Usage: $python bofily.py -help
 
