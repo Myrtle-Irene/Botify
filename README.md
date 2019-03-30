@@ -1,9 +1,4 @@
-# botify
 Currently only telegram supported.
-
-<h1>Made with ❤️ by a 🍌 developer 👻</h1>
-
-
 Usage: $python bofily.py -help
 
 After creating new chatbot you need to go to 'botname' folder and edit database, using any software(e.g. DB Browser SQLite), because automatically created default field names probably are not very useful, then substitute "botname.sql" file with "Export db to sql dump file..." menu option. 
